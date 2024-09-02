@@ -1,5 +1,5 @@
 # Exemplifique a stemização e a lematização de um texto, em língua
-# portuguesa. Ilustre um caso onde textos diferentes conduzem a uma mesma saída
+# inglesa. Ilustre um caso onde textos diferentes conduzem a uma mesma saída
 # através do stemming ou lemmatization. Considere como saída um vetor ordenado
 # contendo lemas e stems.
 
