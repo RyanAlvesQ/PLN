@@ -1,21 +1,3 @@
-# Desenvolva um programa em Python que lê um arquivo de entrada, em
-# formato txt, quebra o texto em palavras e contabiliza quantas vezes a palavra ocorre
-# no texto. Como saída o programa gera um gráfico que ilustra o número de vezes que
-# cada palavra ocorreu. 
-
-# Em processamento de linguagem natural, como são
-# chamadas as palavras que ocorrem com muita frequência e que podem não
-# agregar muito significado? Para o texto que você analisou (que deve conter no
-# mínimo 2000 palavras) quais seriam essas palavras? Quais as classes dessas
-# palavras?
-
-# Em Processamento de Linguagem Natural (PLN), as palavras que ocorrem com muita frequência e
-# podem não agregar muito significado são chamadas de stopwords. Exemplos de stopwords em
-# português incluem "e", "a", "o", "de", "que", "em", entre outras. Essas palavras geralmente pertencem
-# a classes gramaticais como preposições, conjunções, artigos e pronomes.
-
-#pip install matplotlib
-
 import matplotlib.pyplot as plt
 from collections import Counter
 import string
@@ -35,17 +17,20 @@ def count_words(text):
     return word_count
 
 # Função para plotar o gráfico
-def plot_word_frequency(word_count):
-    # Ordena as palavras por frequência
-    common_words = word_count.most_common()
+def plot_word_frequency(word_count, num_words=20):
+    # Ordena as palavras por frequência e seleciona as mais comuns
+    common_words = word_count.most_common(num_words)
     words = [word for word, count in common_words]
     counts = [count for word, count in common_words]
 
-    plt.figure(figsize=(10, 8))
-    plt.barh(words, counts)
+    plt.figure(figsize=(12, 8))
+    plt.barh(words, counts, color='red')
     plt.xlabel('Frequência')
     plt.ylabel('Palavras')
     plt.title('Frequência das Palavras no Texto')
+    plt.gca().invert_yaxis()  # Inverte o eixo y para exibir as palavras mais frequentes no topo
+    plt.xticks(rotation=45)  # Rotaciona os rótulos do eixo x
+    plt.tight_layout()  # Ajusta o layout para evitar sobreposição
     plt.show()
 
 # Caminho para o arquivo de texto
@@ -60,4 +45,4 @@ cleaned_text = clean_text(text)
 word_count = count_words(cleaned_text)
 
 # Plota o gráfico de frequência das palavras
-plot_word_frequency(word_count)
+plot_word_frequency(word_count, num_words=20)
