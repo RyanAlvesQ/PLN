@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raspagem de Avaliações de Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e7f1ff;  /* Fundo azul claro */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #007bff;  /* Azul mais forte para o título */
+        }
+
+        form {
+            background: white;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #007bff;  /* Borda azul */
+            border-radius: 5px;
+            transition: border-color 0.3s; /* Transição suave na borda */
+        }
+
+        input[type="text"]:focus {
+            border-color: #0056b3; /* Azul mais escuro ao focar */
+            outline: none; /* Remove o contorno padrão */
+        }
+
+        button {
+            background-color: #007bff;  /* Azul do botão */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s; /* Transição suave na cor do botão */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+        }
+
+        ul {
+            background: white;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 15px 10px;  
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;  
+            background-color: #f1f9ff;  /* Fundo azul muito claro para cada avaliação */
+            border-radius: 5px;  /* Arredondar os cantos de cada avaliação */
+            position: relative;  /* Para o pseudo-elemento de estrelas */
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .stars {
+            color: #ffcc00;  /* Cor das estrelas */
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .comment {
+            margin-top: 30px;  /* Espaço entre estrelas e comentário */
+        }
+    </style>
+</head>
+<body>
+    <h1>Informe a URL do produto para ver as avaliações</h1>
+    <form method="post">
+        <input type="text" name="url" placeholder="Digite a URL aqui" required>
+        <button type="submit">Raspar Avaliações</button>
+    </form>
+    {% if reviews %}
+        <h2>Avaliações Encontradas:</h2>
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <div class="stars">{{ review.stars }}</div>
+                    <div class="comment">{{ review.comment }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhuma avaliação encontrada.</p>
+    {% endif %}
+</body>
+</html>
